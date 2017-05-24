@@ -267,8 +267,8 @@ function prepare_lvm(){
   vgcreate storage /dev/mapper/lvm #Create the volume group named MyStorage, adding the previously created physical volume to it
 
   #Create all logical volumes on the volume group
-  lvcreate -l 3%VG storage -n swapvol
-  lvcreate -l 25%VG storage -n rootvol
+  lvcreate -l 6G storage -n swapvol
+  lvcreate -l 50G storage -n rootvol
   lvcreate -l +100%FREE storage -n homevol
 
   #Format filesystems on each logical volume
@@ -332,10 +332,10 @@ function configure(){
   local GRAPH_ENV=$7
   local UEFI=$8
   echo "Exporting timezone"
-  LANG="fr_FR.UTF-8"
-  export LANG=fr_FR.UTF-8
-  KEYMAP=fr
-  ln -s /usr/share/zoneinfo/Europe/Paris /etc/localtime
+  LANG="de_DE.UTF-8"
+  export LANG=de_DE.UTF-8
+  KEYMAP=de-latin1-nodeadkeys
+  ln -s /usr/share/zoneinfo/Europe/Berlin /etc/localtime
 
   echo "Prepare bootloader"
   local CRYPTDEVICE="$(blkid -s UUID -o value ${DISK}3)" #Get UUID of the encrypted device
