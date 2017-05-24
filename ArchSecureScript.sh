@@ -267,8 +267,8 @@ function prepare_lvm(){
   vgcreate storage /dev/mapper/lvm #Create the volume group named MyStorage, adding the previously created physical volume to it
 
   #Create all logical volumes on the volume group
-  lvcreate -l 6GiB storage -n swapvol
-  lvcreate -l 50GiB storage -n rootvol
+  lvcreate -L 6GiB storage -n swapvol
+  lvcreate -L 50GiB storage -n rootvol
   lvcreate -l +100%FREE storage -n homevol
 
   #Format filesystems on each logical volume
